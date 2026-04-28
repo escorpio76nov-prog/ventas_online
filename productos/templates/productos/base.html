@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ImportShop</title>
+</head>
+<body>
+
+<h1>Tienda de Productos Importados</h1>
+
+<nav>
+    <a href="/">Inicio</a>
+    <a href="/producto/">Cargar Producto</a>
+    <a href="/categoria/">Cargar Categoría</a>
+    <a href="/proveedor/">Cargar Proveedor</a>
+    <a href="/buscar/">Buscar Producto</a>
+</nav>
+
+<hr>
+
+{% block contenido %}
+
+<h2>Bienvenido a ImportShop</h2>
+
+<p>Productos de importación seleccionados de todo el mundo.</p>
+
+<hr>
+
+<h3>¿Qué querés hacer?</h3>
+
+<ul>
+    <li><a href="/producto/">➕ Cargar un nuevo producto</a></li>
+    <li><a href="/categoria/">📂 Crear una categoría</a></li>
+    <li><a href="/proveedor/">🚚 Agregar un proveedor</a></li>
+    <li><a href="/buscar/">🔍 Buscar productos</a></li>
+</ul>
+
+<hr>
+
+<h3>Sobre la tienda</h3>
+<p>
+Esta web permite gestionar productos importados, organizarlos por categorías
+y asociarlos a proveedores internacionales.
+</p>
+
+{% endblock %}
+
+</body>
+</html>
