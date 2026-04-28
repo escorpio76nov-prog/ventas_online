@@ -3,7 +3,7 @@ Dedicados a vender productos de importacion
 📄 README - ImportShop
 🔧 Funcionalidades
 
-La web permite:
+La web permite : 
 
 Crear Categorías
 Crear Proveedores
