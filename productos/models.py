@@ -1,6 +1,7 @@
 from django.db import models
+from ckeditor.fields import RichTextField
+from django.contrib.auth.models import User
 
-# Create your models here.
 class Categoria(models.Model):
     nombre = models.CharField(max_length=50)
 
@@ -17,10 +18,20 @@ class Proveedor(models.Model):
 
 
 class Producto(models.Model):
+
     nombre = models.CharField(max_length=100)
+
+    marca = models.CharField(max_length=100)
+
+    descripcion = RichTextField()
+
+    imagen = models.ImageField(upload_to='productos')
+
+    fecha = models.DateField(auto_now_add=True)
+
     precio = models.FloatField()
-    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
-    proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
+
+    autor = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.nombre

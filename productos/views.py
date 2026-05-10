@@ -2,16 +2,15 @@ from django.shortcuts import render
 from .models import Producto
 from .forms import ProductoForm, CategoriaForm, ProveedorForm, BusquedaProductoForm
 
-def inicio(request):
-    return render(request, "productos/base.html")
-
+def home(request):
+    return render(request, 'productos/home.html')
 
 def crear_producto(request):
     if request.method == "POST":
         form = ProductoForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, "productos/base.html")
+            return render(request, "productos/inicio.html")
     else:
         form = ProductoForm()
 
@@ -23,7 +22,7 @@ def crear_categoria(request):
         form = CategoriaForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, "productos/base.html")
+            return render(request, "productos/inicio.html")
     else:
         form = CategoriaForm()
 
@@ -35,7 +34,7 @@ def crear_proveedor(request):
         form = ProveedorForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request, "productos/base.html")
+            return render(request, "productos/inicio.html")
     else:
         form = ProveedorForm()
 
@@ -53,4 +52,4 @@ def resultados(request):
         productos = Producto.objects.filter(nombre__icontains=nombre)
         return render(request, "productos/resultados.html", {"productos": productos})
 
-    return render(request, "productos/base.html")
+    return render(request, "productos/inicio.html")
