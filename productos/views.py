@@ -1,55 +1,102 @@
 from django.shortcuts import render
+
+from django.urls import reverse_lazy
+
+from django.contrib.auth.mixins import LoginRequiredMixin
+
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    UpdateView,
+    DeleteView
+)
+
 from .models import Producto
-from .forms import ProductoForm, CategoriaForm, ProveedorForm, BusquedaProductoForm
+
+
+# HOME
 
 def home(request):
+
     return render(request, 'productos/home.html')
 
-def crear_producto(request):
-    if request.method == "POST":
-        form = ProductoForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return render(request, "productos/inicio.html")
-    else:
-        form = ProductoForm()
 
-    return render(request, "productos/crear_producto.html", {"form": form})
+# ABOUT
+
+def about(request):
+
+    return render(request, 'productos/about.html')
 
 
-def crear_categoria(request):
-    if request.method == "POST":
-        form = CategoriaForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return render(request, "productos/inicio.html")
-    else:
-        form = CategoriaForm()
+# LISTAR PRODUCTOS
 
-    return render(request, "productos/crear_categoria.html", {"form": form})
+class ProductoListView(ListView):
+
+    model = Producto
+
+    template_name = 'productos/pages.html'
 
 
-def crear_proveedor(request):
-    if request.method == "POST":
-        form = ProveedorForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return render(request, "productos/inicio.html")
-    else:
-        form = ProveedorForm()
+# DETALLE
 
-    return render(request, "productos/crear_proveedor.html", {"form": form})
+class ProductoDetailView(DetailView):
+
+    model = Producto
+
+    template_name = 'productos/detalle.html'
 
 
-def buscar_producto(request):
-    form = BusquedaProductoForm()
-    return render(request, "productos/buscar_producto.html", {"form": form})
+# CREAR
+
+class ProductoCreateView(LoginRequiredMixin, CreateView):
+
+    model = Producto
+
+    fields = [
+        'nombre',
+        'marca',
+        'descripcion',
+        'imagen',
+        'precio',
+    ]
+
+    template_name = 'productos/crear.html'
+
+    success_url = reverse_lazy('pages')
+
+    def form_valid(self, form):
+
+        form.instance.autor = self.request.user
+
+        return super().form_valid(form)
 
 
-def resultados(request):
-    if request.GET.get("nombre"):
-        nombre = request.GET["nombre"]
-        productos = Producto.objects.filter(nombre__icontains=nombre)
-        return render(request, "productos/resultados.html", {"productos": productos})
+# EDITAR
 
-    return render(request, "productos/inicio.html")
+class ProductoUpdateView(LoginRequiredMixin, UpdateView):
+
+    model = Producto
+
+    fields = [
+        'nombre',
+        'marca',
+        'descripcion',
+        'imagen',
+        'precio',
+    ]
+
+    template_name = 'productos/editar.html'
+
+    success_url = reverse_lazy('pages')
+
+
+# BORRAR
+
+class ProductoDeleteView(LoginRequiredMixin, DeleteView):
+
+    model = Producto
+
+    template_name = 'productos/borrar.html'
+
+    success_url = reverse_lazy('pages')

@@ -1,0 +1,55 @@
+{% extends 'productos/base.html' %}
+
+{% block contenido %}
+
+<h1>Productos Importados</h1>
+
+<a class="btn btn-primary mb-3" href="/pages/create/">
+    Crear Producto
+</a>
+
+{% if object_list %}
+
+<div class="row">
+
+{% for producto in object_list %}
+
+<div class="col-md-4">
+
+<div class="card mb-4">
+
+<img src="{{ producto.imagen.url }}"
+     class="card-img-top">
+
+<div class="card-body">
+
+<h5>{{ producto.nombre }}</h5>
+
+<p>{{ producto.marca }}</p>
+
+<p>${{ producto.precio }}</p>
+
+<a class="btn btn-success"
+   href="/pages/{{ producto.id }}/">
+
+   Leer más
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% else %}
+
+<h3>No hay páginas aún</h3>
+
+{% endif %}
+
+{% endblock %}
