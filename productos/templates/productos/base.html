@@ -23,19 +23,34 @@
 
 <a class="btn btn-outline-light" href="/pages/">Productos</a>
 
+<a class="btn btn-outline-light"
+   href="/buscar/">
+
+Buscar
+
+</a>
+
 {% if user.is_authenticated %}
 
-<a class="btn btn-outline-light" href="/accounts/profile/">Perfil</a>
+<a class="btn btn-outline-light" href="/cuentas/profile/">Perfil</a>
 
 <a class="btn btn-outline-light" href="/mensajes/">Mensajes</a>
 
-<a class="btn btn-danger" href="/accounts/logout/">Logout</a>
+<form action="/cuentas/logout/" method="POST" style="display:inline;">
+
+    {% csrf_token %}
+
+    <button class="btn btn-danger">
+        Logout
+    </button>
+
+</form>
 
 {% else %}
 
-<a class="btn btn-success" href="/accounts/login/">Login</a>
+<a class="btn btn-success" href="/cuentas/login/">Login</a>
 
-<a class="btn btn-primary" href="/accounts/signup/">Registro</a>
+<a class="btn btn-primary" href="/cuentas/signup/">Registro</a>
 
 {% endif %}
 

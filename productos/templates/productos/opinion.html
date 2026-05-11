@@ -1,0 +1,25 @@
+{% extends 'productos/base.html' %}
+
+{% block contenido %}
+
+<h1>
+
+Opinión sobre {{ producto.nombre }}
+
+</h1>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button class="btn btn-success">
+
+        Publicar Opinión
+
+    </button>
+
+</form>
+
+{% endblock %}

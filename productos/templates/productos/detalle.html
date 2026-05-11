@@ -17,6 +17,8 @@
 
 <hr>
 
+{% if user.is_superuser %}
+
 <a class="btn btn-warning"
    href="/pages/update/{{ producto.id }}/">
 
@@ -30,5 +32,64 @@ Editar
 Borrar
 
 </a>
+
+{% endif %}
+
+
+
+<hr>
+
+<h2>Opiniones de Clientes</h2>
+
+<a class="btn btn-primary mb-3"
+   href="/opinion/{{ producto.id }}/">
+
+Agregar Opinión
+
+</a>
+
+{% if producto.opiniones.all %}
+
+{% for opinion in producto.opiniones.all %}
+
+<div class="card mb-3">
+
+<div class="card-body">
+
+<h5>
+
+{{ opinion.usuario }}
+
+</h5>
+
+<p>
+
+{{ opinion.comentario }}
+
+</p>
+
+<p>
+
+⭐ {{ opinion.puntuacion }}/5
+
+</p>
+
+<small>
+
+{{ opinion.fecha }}
+
+</small>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<p>No hay opiniones todavía.</p>
+
+{% endif %}
 
 {% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'productos/base.html' %}
+
+{% block contenido %}
+
+<h1>Editar Perfil</h1>
+
+<form method="POST"
+      enctype="multipart/form-data">
+
+    {% csrf_token %}
+
+    {{ miFormulario.as_p }}
+
+    {{ avatarForm.as_p }}
+
+    <button class="btn btn-success">
+
+        Guardar Cambios
+
+    </button>
+
+</form>
+
+{% endblock %}

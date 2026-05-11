@@ -12,10 +12,18 @@ urlpatterns = [
 
     path('pages/<int:pk>/', ProductoDetailView.as_view(), name='detalle'),
 
-    path('pages/create/', ProductoCreateView.as_view(), name='crear'),
+    path('crear/', ProductoCreateView.as_view(), name='crear'),
 
     path('pages/update/<int:pk>/', ProductoUpdateView.as_view(), name='editar'),
 
     path('pages/delete/<int:pk>/', ProductoDeleteView.as_view(), name='borrar'),
+
+    path('buscar/', buscar_producto, name='buscar'),
+
+    path(
+    'opinion/<int:producto_id>/',
+    crear_opinion,
+    name='opinion'
+    ),
 
 ]

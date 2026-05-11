@@ -1,0 +1,39 @@
+{% extends 'productos/base.html' %}
+
+{% block contenido %}
+
+<h1>Mi Perfil</h1>
+
+{% if avatar.imagen %}
+
+<img src="{{ avatar.imagen.url }}"
+     width="200">
+
+{% else %}
+    <p>No hay foto de perfil</p>
+
+{% endif %}
+
+<hr>
+
+<p><strong>Usuario:</strong> {{ user.username }}</p>
+
+<p><strong>Email:</strong> {{ user.email }}</p>
+
+<p><strong>Nombre:</strong> {{ user.first_name }}</p>
+
+<p><strong>Apellido:</strong> {{ user.last_name }}</p>
+
+<p><strong>Bio:</strong> {{ avatar.bio }}</p>
+
+<p><strong>Nacimiento:</strong>
+{{ avatar.fecha_nacimiento }}</p>
+
+<a class="btn btn-warning"
+   href="/cuentas/editar-perfil/">
+
+Editar Perfil
+
+</a>
+
+{% endblock %}

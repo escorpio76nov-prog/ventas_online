@@ -1,0 +1,28 @@
+{% extends 'productos/base.html' %}
+
+{% block contenido %}
+
+<h1>Usuarios</h1>
+
+{% for usuario in usuarios %}
+
+<div class="card mb-3">
+
+<div class="card-body">
+
+<h5>{{ usuario.username }}</h5>
+
+<a class="btn btn-success"
+   href="/mensajes/enviar/{{ usuario.id }}/">
+
+Enviar Mensaje
+
+</a>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+{% endblock %}

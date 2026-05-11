@@ -1,0 +1,52 @@
+{% extends 'productos/base.html' %}
+
+{% block contenido %}
+
+<h1>Inbox</h1>
+
+<a class="btn btn-primary mb-3"
+   href="/mensajes/usuarios/">
+
+Ver Usuarios
+
+</a>
+
+{% if mensajes %}
+
+{% for mensaje in mensajes %}
+
+<div class="card mb-3">
+
+<div class="card-body">
+
+<h5>
+
+De: {{ mensaje.remitente }}
+
+</h5>
+
+<p>
+
+{{ mensaje.contenido }}
+
+</p>
+
+<small>
+
+{{ mensaje.fecha }}
+
+</small>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<p>No tienes mensajes.</p>
+
+{% endif %}
+
+{% endblock %}

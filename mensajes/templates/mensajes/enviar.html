@@ -1,0 +1,25 @@
+{% extends 'productos/base.html' %}
+
+{% block contenido %}
+
+<h1>
+
+Mensaje para {{ destinatario.username }}
+
+</h1>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button class="btn btn-success">
+
+        Enviar
+
+    </button>
+
+</form>
+
+{% endblock %}

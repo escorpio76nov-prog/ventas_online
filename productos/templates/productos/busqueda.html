@@ -2,19 +2,29 @@
 
 {% block contenido %}
 
-<h1>Productos Importados</h1>
+<h1>Buscar Productos</h1>
 
-{% if user.is_superuser %}
-<a class="btn btn-primary mb-3" href="/crear/">
-    Crear Producto
-</a>
-{% endif %}
+<form method="GET">
 
-{% if object_list %}
+    {{ formulario.as_p }}
+
+    <button class="btn btn-primary">
+
+        Buscar
+
+    </button>
+
+</form>
+
+<hr>
+
+{% if productos %}
+
+<h3>Resultados:</h3>
 
 <div class="row">
 
-{% for producto in object_list %}
+{% for producto in productos %}
 
 <div class="col-md-4">
 
@@ -34,7 +44,7 @@
 <a class="btn btn-success"
    href="/pages/{{ producto.id }}/">
 
-   Leer más
+Leer más
 
 </a>
 
@@ -48,9 +58,9 @@
 
 </div>
 
-{% else %}
+{% elif request.GET.nombre %}
 
-<h3>No hay páginas aún</h3>
+<h3>No se encontraron productos.</h3>
 
 {% endif %}
 

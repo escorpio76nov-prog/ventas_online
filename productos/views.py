@@ -1,8 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from django.urls import reverse_lazy
 
 from django.contrib.auth.mixins import LoginRequiredMixin
+
+from .forms import BusquedaFormulario
+
+from django.contrib.auth.mixins import UserPassesTestMixin
+
+from django.contrib.auth.decorators import login_required
+
+from .forms import OpinionFormulario
 
 from django.views.generic import (
     ListView,
@@ -49,7 +57,15 @@ class ProductoDetailView(DetailView):
 
 # CREAR
 
-class ProductoCreateView(LoginRequiredMixin, CreateView):
+class ProductoCreateView(
+    LoginRequiredMixin,
+    UserPassesTestMixin,
+    CreateView
+):
+    
+    def test_func(self):
+
+        return self.request.user.is_superuser
 
     model = Producto
 
@@ -74,7 +90,15 @@ class ProductoCreateView(LoginRequiredMixin, CreateView):
 
 # EDITAR
 
-class ProductoUpdateView(LoginRequiredMixin, UpdateView):
+class ProductoUpdateView(
+    LoginRequiredMixin,
+    UserPassesTestMixin,
+    UpdateView
+):
+
+    def test_func(self):
+
+        return self.request.user.is_superuser
 
     model = Producto
 
@@ -93,10 +117,76 @@ class ProductoUpdateView(LoginRequiredMixin, UpdateView):
 
 # BORRAR
 
-class ProductoDeleteView(LoginRequiredMixin, DeleteView):
+class ProductoDeleteView(
+    LoginRequiredMixin,
+    UserPassesTestMixin,
+    DeleteView
+):
+    
+    def test_func(self):
+
+        return self.request.user.is_superuser
 
     model = Producto
 
     template_name = 'productos/borrar.html'
 
     success_url = reverse_lazy('pages')
+
+def buscar_producto(request):
+
+    formulario = BusquedaFormulario()
+
+    productos = []
+
+    if request.GET.get('nombre'):
+
+        nombre = request.GET['nombre']
+
+        productos = Producto.objects.filter(
+            nombre__icontains=nombre
+        )
+
+    return render(
+        request,
+        'productos/busqueda.html',
+        {
+            'formulario': formulario,
+            'productos': productos
+        }
+    )
+
+@login_required
+def crear_opinion(request, producto_id):
+
+    producto = Producto.objects.get(id=producto_id)
+
+    if request.method == 'POST':
+
+        form = OpinionFormulario(request.POST)
+
+        if form.is_valid():
+
+            opinion = form.save(commit=False)
+
+            opinion.usuario = request.user
+
+            opinion.producto = producto
+
+            opinion.save()
+
+            return redirect('detalle', pk=producto.id)
+
+    else:
+
+        form = OpinionFormulario()
+
+    return render(
+        request,
+        'productos/opinion.html',
+        {
+            'form': form,
+            'producto': producto
+        }
+    )
+
