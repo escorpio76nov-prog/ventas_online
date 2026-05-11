@@ -60,3 +60,29 @@ class Opinion(models.Model):
     def __str__(self):
 
         return f'{self.usuario} - {self.producto}'
+    
+
+class Carrito(models.Model):
+
+    usuario = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    producto = models.ForeignKey(
+        Producto,
+        on_delete=models.CASCADE
+    )
+
+    cantidad = models.IntegerField(default=1)
+
+    creado = models.DateTimeField(auto_now_add=True)
+
+    def subtotal(self):
+
+        return self.producto.precio * self.cantidad
+
+    def __str__(self):
+
+        return f'{self.usuario} - {self.producto}'
+    

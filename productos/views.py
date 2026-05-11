@@ -12,6 +12,12 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import OpinionFormulario
 
+from .models import Carrito
+
+import mercadopago
+
+from django.conf import settings
+
 from django.views.generic import (
     ListView,
     DetailView,
@@ -190,3 +196,100 @@ def crear_opinion(request, producto_id):
         }
     )
 
+@login_required
+def agregar_carrito(request, producto_id):
+
+    producto = Producto.objects.get(id=producto_id)
+
+    item, created = Carrito.objects.get_or_create(
+        usuario=request.user,
+        producto=producto
+    )
+
+    if not created:
+
+        item.cantidad += 1
+
+        item.save()
+
+    return redirect('carrito')
+
+@login_required
+def carrito(request):
+
+    items = Carrito.objects.filter(
+        usuario=request.user
+    )
+
+    total = 0
+
+    for item in items:
+
+        total += item.subtotal()
+
+    return render(
+        request,
+        'productos/carrito.html',
+        {
+            'items': items,
+            'total': total
+        }
+    )
+
+
+@login_required
+def eliminar_carrito(request, item_id):
+
+    item = Carrito.objects.get(id=item_id)
+
+    item.delete()
+
+    return redirect('carrito')
+
+@login_required
+def pagar(request):
+
+    sdk = mercadopago.SDK(
+        settings.MERCADO_PAGO_ACCESS_TOKEN
+    )
+
+    items_carrito = Carrito.objects.filter(
+        usuario=request.user
+    )
+
+    items = []
+
+    for item in items_carrito:
+
+        items.append({
+            "title": item.producto.nombre,
+            "quantity": item.cantidad,
+            "unit_price": float(item.producto.precio),
+        })
+
+    preference_data = {
+
+        "items": items,
+
+        "back_urls": {
+            "success": "http://127.0.0.1:8000/",
+            "failure": "http://127.0.0.1:8000/carrito/",
+            "pending": "http://127.0.0.1:8000/carrito/"
+        },
+
+        "auto_return": "approved",
+    }
+
+    preference_response = sdk.preference().create(
+        preference_data
+    )
+
+    preference = preference_response["response"]
+
+    return render(
+        request,
+        'productos/pagar.html',
+        {
+            'preference': preference
+        }
+    )

@@ -26,4 +26,29 @@ urlpatterns = [
     name='opinion'
     ),
 
+    path(
+    'carrito/',
+    carrito,
+    name='carrito'
+    ),
+
+    path(
+    'agregar-carrito/<int:producto_id>/',
+    agregar_carrito,
+    name='agregar_carrito'
+    ),
+
+    path(
+    'eliminar-carrito/<int:item_id>/',
+    eliminar_carrito,
+    name='eliminar_carrito'
+    ),
+
+    path(
+    'pagar/',
+    pagar,
+    name='pagar'
+    ),
+
 ]
+

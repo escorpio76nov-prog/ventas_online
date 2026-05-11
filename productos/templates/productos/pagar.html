@@ -1,0 +1,31 @@
+{% extends 'productos/base.html' %}
+
+{% block contenido %}
+
+<h1>Finalizar Compra</h1>
+
+<script
+src="https://sdk.mercadopago.com/js/v2">
+</script>
+
+<div id="wallet_container"></div>
+
+<script>
+
+const mp = new MercadoPago(
+    'APP_USR-80b1b683-aa77-45ec-86f9-206207ea3b77'
+);
+
+mp.bricks().create(
+    "wallet",
+    "wallet_container",
+    {
+        initialization: {
+            preferenceId: "{{ preference.id }}"
+        },
+    }
+);
+
+</script>
+
+{% endblock %}

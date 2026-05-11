@@ -1,0 +1,65 @@
+{% extends 'productos/base.html' %}
+
+{% block contenido %}
+
+<h1>Mi Carrito</h1>
+
+{% if items %}
+
+<table class="table">
+
+<tr>
+
+<th>Producto</th>
+
+<th>Cantidad</th>
+
+<th>Subtotal</th>
+
+<th></th>
+
+</tr>
+
+{% for item in items %}
+
+<tr>
+
+<td>{{ item.producto.nombre }}</td>
+
+<td>{{ item.cantidad }}</td>
+
+<td>${{ item.subtotal }}</td>
+
+<td>
+
+<a class="btn btn-danger"
+   href="/eliminar-carrito/{{ item.id }}/">
+
+Eliminar
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<h3>Total: ${{ total }}</h3>
+
+<a class="btn btn-success"
+   href="/pagar/">
+
+Pagar con Mercado Pago
+
+</a>
+
+{% else %}
+
+<h3>Tu carrito está vacío.</h3>
+
+{% endif %}
+
+{% endblock %}
