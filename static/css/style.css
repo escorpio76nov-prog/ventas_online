@@ -1,0 +1,154 @@
+body {
+
+    background: linear-gradient(
+        135deg,
+        #5984d4,
+        #47618d
+    );
+
+    min-height: 100vh;
+
+    background-attachment: fixed;
+
+    color: white;
+}
+
+
+/* Cards */
+
+.card {
+
+    border: none;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+
+    transition: 0.3s;
+}
+
+
+.card:hover {
+
+    transform: scale(1.02);
+
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+}
+
+
+/* Navbar */
+
+.navbar {
+
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+
+/* Botones */
+
+.btn {
+
+    border-radius: 10px;
+}
+
+
+/* Formularios */
+
+form {
+
+    background: rgba(255,255,255,0.1);
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+    backdrop-filter: blur(5px);
+}
+
+
+/* Inputs */
+
+input,
+textarea,
+select {
+
+    border-radius: 10px !important;
+}
+
+
+/* Titulos */
+
+h1, h2, h3 {
+
+    font-weight: bold;
+}
+
+/* Fade animation */
+
+.card {
+
+    animation: fadeIn 0.6s ease;
+}
+
+
+@keyframes fadeIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(20px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+}
+
+
+/* Hover botones */
+
+.btn {
+
+    transition: 0.3s;
+}
+
+
+.btn:hover {
+
+    transform: scale(1.05);
+}
+
+/* Dark Mode */
+
+.dark-mode {
+
+    background: #121212 !important;
+
+    color: white !important;
+}
+
+
+.dark-mode .card {
+
+    background: #1e1e1e;
+
+    color: white;
+}
+
+
+.dark-mode .navbar {
+
+    background: #000 !important;
+}
+
+
+.dark-mode form {
+
+    background: rgba(255,255,255,0.05);
+}

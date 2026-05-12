@@ -70,7 +70,19 @@ Agregar Opinión
 
 <p>
 
-⭐ {{ opinion.puntuacion }}/5
+{% for i in "12345" %}
+
+    {% if forloop.counter <= opinion.puntuacion %}
+
+        <i class="bi bi-star-fill text-warning"></i>
+
+    {% else %}
+
+        <i class="bi bi-star text-warning"></i>
+
+    {% endif %}
+
+{% endfor %}
 
 </p>
 
@@ -98,5 +110,17 @@ Agregar Opinión
 Agregar al carrito
 
 </a>
+
+<p>
+
+<b>Categoría:</b>
+
+<span class="badge bg-success">
+
+{{ producto.categoria.nombre }}
+
+</span>
+
+</p>
 
 {% endblock %}

@@ -25,8 +25,15 @@ SECRET_KEY = 'django-insecure-(w(!8as+x)_-3x))3(#$p++nfleqmkn0uk$$$fdb_1w7bk2=9)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+        'stinger-cymbal-unmade.ngrok-free.dev', # Agrega este
+    '127.0.0.1', 
+    'localhost',                 
+]
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://stinger-cymbal-unmade.ngrok-free.dev',
+]
 
 # Application definition
 
@@ -72,6 +79,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'productos.context_processors.carrito_total',
             ],
         },
     },
@@ -126,6 +134,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
 LOGIN_URL = 'login'
 
-MERCADO_PAGO_ACCESS_TOKEN = 'TU_ACCESS_TOKEN'
+MERCADO_PAGO_ACCESS_TOKEN = 'APP_USR-940081121918101-051102-79dc6d3c96d519d8f75537b00cc18745-3390921102'

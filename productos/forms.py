@@ -1,6 +1,7 @@
 from django import forms
 from .models import Producto
 from .models import Opinion
+from .models import Categoria
 
 class ProductoFormulario(forms.ModelForm):
 
@@ -9,6 +10,7 @@ class ProductoFormulario(forms.ModelForm):
         model = Producto
 
         fields = [
+            'categoria',
             'nombre',
             'marca',
             'descripcion',
@@ -39,3 +41,10 @@ class OpinionFormulario(forms.ModelForm):
             'puntuacion'
         ]
 
+class CategoriaFormulario(forms.ModelForm):
+
+    class Meta:
+
+        model = Categoria
+
+        fields = ['nombre']

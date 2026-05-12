@@ -50,5 +50,13 @@ urlpatterns = [
     name='pagar'
     ),
 
+    path('pago-exitoso/', pago_exitoso, name='pago_exitoso'),
+
+    path(
+    'crear-categoria/',
+    crear_categoria,
+    name='crear_categoria'
+    ),
+
 ]
 

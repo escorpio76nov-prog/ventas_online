@@ -20,19 +20,27 @@ class Proveedor(models.Model):
 
 class Producto(models.Model):
 
+    categoria = models.ForeignKey(
+    Categoria,
+    on_delete=models.CASCADE,
+    null=True,
+    blank=True
+    ) 
+
     nombre = models.CharField(max_length=100)
 
-    marca = models.CharField(max_length=100, default=25)
+    marca = models.CharField(max_length=100)
 
     descripcion = RichTextField(default='Descripción por defecto')
 
-    imagen = models.ImageField(upload_to='productos', default='media/default.png', blank=True)
+    imagen = models.ImageField(upload_to='productos', default='default.png', blank=True)
 
     fecha = models.DateField(default=timezone.now)
 
     precio = models.FloatField()
 
     autor = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+
 
     def __str__(self):
         return self.nombre

@@ -1,0 +1,21 @@
+{% extends 'productos/base.html' %}
+
+{% block contenido %}
+
+<h1>Crear Categoría</h1>
+
+<form method="POST">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button class="btn btn-success">
+
+        Guardar Categoría
+
+    </button>
+
+</form>
+
+{% endblock %}

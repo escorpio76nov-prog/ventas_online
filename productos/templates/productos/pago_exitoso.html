@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago Exitoso</title>
+    <!-- Usamos un CDN de Bootstrap para que se vea bien rápido -->
+    <link href="https://jsdelivr.net" rel="stylesheet">
+    <style>
+        .success-card {
+            max-width: 500px;
+            margin: 100px auto;
+            text-align: center;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            background: #d4edda;
+            color: #28a745;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin: 0 auto 20px;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <div class="container">
+        <div class="card success-card">
+            <div class="icon-circle">
+                ✓
+            </div>
+            <h1 class="display-6 fw-bold text-success">¡Pago Confirmado!</h1>
+            <p class="lead text-muted">Muchas gracias por tu compra. Tu pedido está siendo procesado.</p>
+            
+            <hr class="my-4">
+
+            <div class="d-grid gap-2">
+                <a href="{% url 'index' %}" class="btn btn-primary btn-lg">Volver al Inicio</a>
+                <!-- O si tienes una vista de historial -->
+                <!-- <a href="{% url 'mis_compras' %}" class="btn btn-outline-secondary">Ver mis compras</a> -->
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

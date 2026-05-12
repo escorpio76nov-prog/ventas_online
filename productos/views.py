@@ -14,6 +14,10 @@ from .forms import OpinionFormulario
 
 from .models import Carrito
 
+from .forms import CategoriaFormulario
+
+from django.contrib import messages
+
 import mercadopago
 
 from django.conf import settings
@@ -76,6 +80,7 @@ class ProductoCreateView(
     model = Producto
 
     fields = [
+        'categoria',
         'nombre',
         'marca',
         'descripcion',
@@ -109,6 +114,7 @@ class ProductoUpdateView(
     model = Producto
 
     fields = [
+        'categoria',
         'nombre',
         'marca',
         'descripcion',
@@ -270,26 +276,65 @@ def pagar(request):
     preference_data = {
 
         "items": items,
-
         "back_urls": {
-            "success": "http://127.0.0.1:8000/",
-            "failure": "http://127.0.0.1:8000/carrito/",
-            "pending": "http://127.0.0.1:8000/carrito/"
+            "success": "https://stinger-cymbal-unmade.ngrok-free.dev/pago_exitoso/",
+            "failure": "https://stinger-cymbal-unmade.ngrok-free.dev/carrito/",
+            "pending": "https://stinger-cymbal-unmade.ngrok-free.dev/carrito/"
         },
 
         "auto_return": "approved",
+
     }
 
     preference_response = sdk.preference().create(
-        preference_data
+    preference_data
     )
 
-    preference = preference_response["response"]
+    print(preference_response)
+
+    preference = preference_response.get("response", {})
 
     return render(
         request,
         'productos/pagar.html',
         {
             'preference': preference
+        }
+    )
+
+def pago_exitoso(request):
+    return render(request, 'productos/pago_exitoso.html')
+
+@login_required
+def crear_categoria(request):
+
+    if not request.user.is_superuser:
+
+        return redirect('home')
+
+    if request.method == 'POST':
+
+        form = CategoriaFormulario(request.POST)
+
+        if form.is_valid():
+
+            form.save()
+
+            messages.success(
+            request,
+            'Categoría creada correctamente'
+             )
+
+            return redirect('crear_categoria')
+
+    else:
+
+        form = CategoriaFormulario()
+
+    return render(
+        request,
+        'productos/crear_categoria.html',
+        {
+            'form': form
         }
     )
