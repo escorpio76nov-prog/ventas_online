@@ -106,3 +106,9 @@ Sitio web de ventas online de productos de importación.
 ## Enlace a video de muestra
 
 https://drive.google.com/file/d/1fOd7n8rh5j80ZlzlWPNY4oMiZF72WllB/view?usp=sharing
+
+# Mejoras faltantes si quisiera continuar el proyecto
+
+- Crear diferentes perfiles de cliente y vendedor.
+- Que los clientes solo puedan enviar mensajes al vendedor.
+- Funciones de admin para administrar usuarios.
