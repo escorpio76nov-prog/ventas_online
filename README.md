@@ -103,4 +103,6 @@ Sitio web de ventas online de productos de importación.
 - Superusuario
 /admin/
 
+## Enlace a video de muestra
 
+https://drive.google.com/file/d/1fOd7n8rh5j80ZlzlWPNY4oMiZF72WllB/view?usp=sharing
