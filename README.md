@@ -107,6 +107,9 @@ Sitio web de ventas online de productos de importación.
 
 https://drive.google.com/file/d/1fOd7n8rh5j80ZlzlWPNY4oMiZF72WllB/view?usp=sharing
 
+## Cuenta admin
+- Usr: aoguz Pass: Perro456 
+
 # Mejoras faltantes si quisiera continuar el proyecto
 
 - Crear diferentes perfiles de cliente y vendedor.
